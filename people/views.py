@@ -226,3 +226,8 @@ def seatDetail(request):
 
     return render(request, 'seatDetail.html', {'tableid':tableid,'guestall':json.dumps(guestall)})
 
+
+def testanimte(request):
+
+    return render(request, 'testanimte.html', {})
+

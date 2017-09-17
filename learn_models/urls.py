@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^seatSearch/', views.seatSearch),
     url(r'^seatDetail/', views.seatDetail),
     url(r'^testdb$', views.testdb),
+    url(r'^testanimte', views.testanimte),
 ]
