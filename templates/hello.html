@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dfsdfsd</title>
+</head>
+<body>
+    <h1>{{ hello1 }}</h1>
+
+
+
+<table width="600" border="0">
+    <tr>
+    {% load staticfiles %}
+    {% for img in images1 %}
+        <td>
+    <img src="{% static img %}" width="32" height="32"/>
+    {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        {% load staticfiles %}
+
+    {% for img in images2 %}
+        <td>
+    <img src="{% static img %}" width="32" height="32"/>
+            </td>
+    {% endfor %}
+
+    </tr>
+</table>
+</body>
+</html>

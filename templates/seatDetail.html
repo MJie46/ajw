@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<script>
+function createTable()
+{
+with(document)
+{
+write("<table border='1'>");
+for(var i=0;i<10;i++)
+{
+write("<tr><td>");
+write(i);
+write("</td></tr>");
+}
+write("</table>")
+}
+}
+</script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>'detail'</title>
+</head>
+<body>
+    <h1>搜索结果</h1>
+    <h1>您在第{{tableid}}围，可参考下面的图入座</h1>
+
+    <!--<canvas id="canvas" width=1200 height=document.body.clientWidth*1800/1204.0 style="border:1px solid #c3c3c3;"/>-->
+    <canvas id="canvas" width=1200 height=2400 style="border:1px solid #c3c3c3;"/>
+
+    <br>网页可见区域宽:document.body.clientWidth<br />
+
+    <script>
+
+        var canvas=document.getElementById("canvas");
+        var ctx=canvas.getContext("2d");
+        <!--var width = document.body.clientWidth-->
+        var rate = 1400/1200.0
+        var width = 1200
+        var height = 1400
+        var tw1 = 600*rate
+        var th1 = 200*rate
+        var tw2 = 200*rate
+        var th2 = 800*rate
+        var tc = 50*rate
+        var intx = ((width-tw2)/2-0-tc*2*2)/(3)
+        var intx1 = ((width-tw2)/2-0-tc*1*2)/(2)
+        var inty = 30*rate
+        var ptx = 0
+        var pty = 0
+        var number = 0
+        var number1 = [3,1,7,8,13,14,19,20,25,26]
+        var number2 = [5,11,17,23]
+        var number3 = [2,4,9,10,15,16,21,22,27,28]
+        var number4 = [6,12,18,24]
+        var numbers = [number1,number2,number3,number4]
+        var font = '43pt Microsoft YaHei'
+        var linewidth = 2
+        var color_black = '#000000'
+        var color_red = '#FFC90A'
+        var color_gray = '#969696'
+        var tables = []
+        var guestlist = {{ guestall|safe }};
+
+        var drawTable=function(ctx,ptx,pty){
+            this.x = ptx
+            this.y = pty
+            this.radius = tc
+            ctx.beginPath();
+            ctx.strokeStyle = color_black
+            ctx.arc(ptx,pty,tc,0,2*Math.PI);
+            ctx.stroke();
+        }
+
+
+        function mousePos(e)
+        {//获取鼠标所在位置的坐标，相对于整个页面
+          var x,y;
+          var e = e||window.event;
+          return {
+            x:e.clientX+document.body.scrollLeft + document.documentElement.scrollLeft,
+            y:e.clientY+document.body.scrollTop + document.documentElement.scrollTop
+          };
+        }
+
+        function getCanvasPos(canvas,e)
+        {//获取鼠标在canvas上的坐标
+            var rect = canvas.getBoundingClientRect();
+            return {
+             x: e.clientX - rect.left * (canvas.width / rect.width),
+             y: e.clientY - rect.top * (canvas.height / rect.height)
+           };
+        }
+
+
+        var drawText=function(ctx,font,linewidth,color,text,ptx,pty){
+            ctx.font = font;
+            ctx.lineWidth = linewidth;
+            ctx.strokeStyle = color;
+            ctx.strokeText(text,ptx,pty);
+            ctx.fillStyle = color_black
+            ctx.fillText(text,ptx,pty);
+            ctx.stroke();
+        }
+
+         var hightlightTable=function(ctx,color1,color2,ptx,pty,tc){
+            var grd=ctx.createRadialGradient(ptx,pty,tc-35,ptx,pty,tc);
+            grd.addColorStop(0,color1);
+            grd.addColorStop(1,color2);
+            ctx.fillStyle=grd;
+            ctx.fill()
+        }
+
+
+        canvas.onmousedown = function(e){
+            var cc = tables[0];
+            var xy = getCanvasPos(canvas,e)
+            <!--alert(xy.x+'=='+xy.y+'-&#45;&#45;'+cc.x+'==='+cc.y)-->
+
+           for(var i=0;i<tables.length;i++){
+                var c = tables[i];
+                var xy = getCanvasPos(canvas,e)
+
+                //client是相对于浏览器的坐标，如要获取相对于父元素即canvas画布，可以替换成e.offsetX和e.offsetY获取坐标
+                if((xy.x-c.x)*(xy.x-c.x)+(xy.y-c.y)*(xy.y-c.y)<=c.radius*c.radius){
+
+                    var tableid = 0
+                    if (i < number1.length){
+                        tableid = number1[i]
+                    }
+                    else if (i < number1.length + number2.length){
+                        tableid = number2[i-number1.length]
+                    }
+                    else if (i < number1.length + number2.length + number3.length){
+                        tableid = number3[i-number1.length-number2.length]
+                    }
+                    else if (i < number1.length + number2.length + number3.length + number4.length){
+                       tableid = number4[i-number1.length-number2.length-number3.length]
+                    }
+
+                     <!--alert('table:'+tableid)-->
+                     var key = (tableid)
+                     console.log(key)
+                     var list = guestlist[key]
+                     var str = ''
+                     for (var i = 0 ; i < list.length ; i++){
+                         var row = list[i]
+                         str += row[1]+'\n'
+                     }
+                     console.log(guestlist)
+                     alert(str)
+
+                     break
+                }else{
+                    <!--if(c.isHover){-->
+                        <!--c.isHover = false;-->
+                        <!--c.out && c.out();-->
+                    <!--}-->
+                }
+            }
+        }
+
+
+
+
+        ctx.fillStyle=color_gray;
+        ctx.fillRect((width-tw1)/2,0,tw1,th1);
+        ctx.fillStyle=color_gray;
+        ctx.fillRect((width-tw2)/2,0,tw2,th2);
+
+
+        for (var i=0; i<number1.length; i++)
+        {
+            ptx = (intx+tc*2)*(i%2)+(intx+tc)
+            pty = th1+inty+tc+(tc*2+inty)*2*(parseInt(i/2))
+            number = number1[i]
+            table = new drawTable(ctx,ptx,pty)
+            tables.push(table)
+            drawText(ctx,font,linewidth,color_black,number,number>9?ptx-34:ptx-16,pty+20)
+            if (number === {{tableid}}){
+                hightlightTable(ctx,color_red,"white",ptx,pty,tc)
+            }
+        }
+
+        for (var i=0; i<number2.length; i++)
+        {
+            ptx = intx1+tc
+            pty = th1+inty+tc+(tc*2+inty)*2*i+tc*2+inty
+            number = number2[i]
+            table = new drawTable(ctx,ptx,pty)
+            tables.push(table)
+            drawText(ctx,font,linewidth,color_black,number,number>9?ptx-34:ptx-16,pty+20)
+            if (number === {{tableid}}){
+                hightlightTable(ctx,color_red,"white",ptx,pty,tc)
+            }
+        }
+
+        for (var i=0; i<number3.length; i++)
+        {
+            ptx = (width+tw2)/2+(intx+tc*2)*(i%2)+(intx+tc)
+            pty = th1+inty+tc+(tc*2+inty)*2*(parseInt(i/2))
+            number = number3[i]
+            table = new drawTable(ctx,ptx,pty)
+            tables.push(table)
+            drawText(ctx,font,linewidth,color_black,number,number>9?ptx-34:ptx-16,pty+20)
+            if (number === {{tableid}}){
+                hightlightTable(ctx,color_red,"white",ptx,pty,tc)
+            }
+        }
+
+        for (var i=0; i<number4.length; i++)
+        {
+            ptx = (width+tw2)/2+intx1+tc
+            pty = th1+inty+tc+(tc*2+inty)*2*i+tc*2+inty
+            number = number4[i]
+            table = new drawTable(ctx,ptx,pty)
+            tables.push(table)
+            drawText(ctx,font,linewidth,color_black,number,number>9?ptx-34:ptx-16,pty+20)
+            if (number === {{tableid}}){
+                hightlightTable(ctx,color_red,"white",ptx,pty,tc)
+            }
+        }
+
+    </script>
+</body>
+</html>
+
+
+<!--<html>-->
+<!--<script>-->
+<!--function a(){-->
+<!--document.write(-->
+<!--"屏幕分辨率为："+screen.width+"*"+screen.height  //最好是window.screen-->
+<!--+"<br />"+-->
+<!--"屏幕可用大小："+screen.availWidth+"*"+screen.availHeight-->
+<!--+"<br />"+-->
+<!--"网页可见区域宽："+document.body.clientWidth-->
+<!--+"<br />"+-->
+<!--"网页可见区域高："+document.body.clientHeight-->
+<!--+"<br />"+-->
+<!--"网页可见区域宽(包括边线的宽)："+document.body.offsetWidth-->
+<!--+"<br />"+-->
+<!--"网页可见区域高(包括边线的宽)："+document.body.offsetHeight-->
+<!--+"<br />"+-->
+<!--"网页正文全文宽："+document.body.scrollWidth-->
+<!--+"<br />"+-->
+<!--"网页正文全文高："+document.body.scrollHeight-->
+<!--+"<br />"+-->
+<!--"网页被卷去的高："+document.body.scrollTop-->
+<!--+"<br />"+-->
+<!--"网页被卷去的左："+document.body.scrollLeft-->
+<!--+"<br />"+-->
+<!--"网页正文部分上："+window.screenTop-->
+<!--+"<br />"+-->
+<!--"网页正文部分左："+window.screenLeft-->
+<!--+"<br />"+-->
+<!--"屏幕分辨率的高："+window.screen.height-->
+<!--+"<br />"+-->
+<!--"屏幕分辨率的宽："+window.screen.width-->
+<!--+"<br />"+-->
+<!--"屏幕可用工作区高度："+window.screen.availHeight-->
+<!--+"<br />"+-->
+<!--"屏幕可用工作区宽度："+window.screen.availWidth-->
+<!--);-->
+<!--}-->
+<!--function set_bgColor(){-->
+  <!--document.body.style.backgroundColor="red";-->
+<!--}-->
+<!--function set_bgImg(){-->
+  <!--document.body.style.backgroundImage="url(t/JS获取屏幕大小 - 风飘零 - 博客园.png)";-->
+<!--}-->
+<!--</script>-->
+<!--<body onLoad="a()" >-->
+ <!--<input type='button' value="set_bgColor" onclick="set_bgColor();"> <br>-->
+ <!--<input type='button' value="set_bgImg" onclick="set_bgImg()">-->
+<!--</body>-->
+<!--</html>-->
