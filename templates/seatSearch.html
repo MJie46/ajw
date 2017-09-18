@@ -3,25 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>seatSearch</title>
+    <style>
+
+    input::-webkit-input-placeholder {
+        /* placeholder颜色  */
+        color: #000000;
+        /* placeholder字体大小  */
+        font-size: 38%;
+        /* placeholder位置  */
+        text-align: right;
+    }
+    input.name {
+        font-size:90%;
+        width:25%;height:70%;
+        text-align:center;
+        background-color:transparent;
+        border-width:1px;
+        transform:rotate(200deg);
+        -ms-transform:rotate(200deg); 	/* IE 9 */
+        -moz-transform:rotate(190deg); 	/* Firefox */
+        -webkit-transform:rotate(-27deg); /* Safari 和 Chrome */
+        -o-transform:rotate(200deg); 	/* Opera */
+    }
+    </style>
 </head>
 <body>
     <h1 style="font-size:60px">座位搜索</h1>
 
     {% load staticfiles %}
     <div >
-            <img src="{% static 'xiongba1.png' %}" width="622" height="700" style="color:blue;margin-left:20px;">
+                <img src="{% static 'xiongba4.png' %}" style="width:100%;height:100%;color:blue;margin-left:0px;">
 
-       <form action="../seatDetail/" style="position:absolute;font-size:80px;margin-top:-670px;margin-left:85px">
-           <h1 style="font-size:20px;transform:rotate(200deg);
--ms-transform:rotate(200deg); 	/* IE 9 */
--moz-transform:rotate(190deg); 	/* Firefox */
--webkit-transform:rotate(-26deg); /* Safari 和 Chrome */
--o-transform:rotate(200deg); 	/* Opera */">这里输入名字</h1>
-        <input name="name" style="font-size:30px;width:200px;height:100px;transform:rotate(200deg);
--ms-transform:rotate(200deg); 	/* IE 9 */
--moz-transform:rotate(190deg); 	/* Firefox */
--webkit-transform:rotate(-26deg); /* Safari 和 Chrome */
--o-transform:rotate(200deg); 	/* Opera */">
+               <form action="../seatDetail/" style="position:absolute;font-size:80px;margin-top:-134%;margin-left:11%">
+           <!--<h1 style="font-size:50%;margin-top:0;transform:rotate(200deg);-->
+              <!-- -ms-transform:rotate(200deg); 	/* IE 9 */-->
+              <!-- -moz-transform:rotate(190deg); 	/* Firefox */-->
+              <!-- -webkit-transform:rotate(-26deg); /* Safari 和 Chrome */-->
+              <!-- -o-transform:rotate(200deg); 	/* Opera */">点击输入名字</h1>-->
+        <input name="name" class="name" placeholder="点击输入名字" >
             <br>
             <!--<input type="submit" style="font-size:80px" size="10">-->
         </form>
