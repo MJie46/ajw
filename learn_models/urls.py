@@ -27,3 +27,4 @@ urlpatterns = [
     url(r'^testdb$', views.testdb),
     url(r'^testanimte', views.testanimte),
 ]
+# url(r'^static/(?P<path>.*)', 'django.views.static.serve', {'document_root': 'd:/wwwsite/office/static'}),

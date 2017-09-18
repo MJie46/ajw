@@ -157,26 +157,28 @@ def index(request):
     # cursor = conn.execute(sql,value)
     # conn.commit()
 
-    # print ('select')
-    # cursor = conn.execute("SELECT * from test")
-    # ctn = 0
-    # for row in cursor:
-    #     ctn += 1
-    #     data = row[1]
-    #     data = np.loadtxt(data)
-    #     data = np.array(data,dtype='uint8')
-    #     data = np.reshape(data,[64,64,3])
-    #     image = Image.fromarray(data)
-    #     # image.save('static/image/p.png')
-    #     # image.show()
-    #
-    #
-    # cursor.close()
-    # print (ctn)
-    # images1 = ['%d.png'%i for i in range(64)]
-    # images2 = ['%d.png' % (i+64) for i in range(64)]
-    images1 = []
-    images2 = []
+    print ('select')
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.execute("SELECT * from test")
+    ctn = 0
+    for row in cursor:
+        ctn += 1
+        data = row[1]
+        data = np.loadtxt(data)
+        data = np.array(data,dtype='uint8')
+        data = np.reshape(data,[64,64,3])
+        image = Image.fromarray(data)
+        # image.save('static/image/p.png')
+        # image.show()
+
+
+    cursor.close()
+    print (ctn)
+    images1 = ['%d.png'%i for i in range(64)]
+    images2 = ['%d.png' % (i+64) for i in range(64)]
+    # images1 = []
+    # images2 = []
+    print(images1)
     return render(request, 'hello.html', {'images1':images1,'images2':images2})
     # return HttpResponse("Hello world !!! ")
 

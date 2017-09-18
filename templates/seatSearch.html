@@ -5,11 +5,27 @@
     <title>seatSearch</title>
 </head>
 <body>
-    <h1 style="font-size:80px">座位搜索</h1>
-    <form action="../seatDetail/" style="font-size:80px">
-    请输入你的姓名: <input name="name" style="font-size:80px">
-        <br>
-        <input type="submit" style="font-size:80px" size="10">
-    </form>
+    <h1 style="font-size:60px">座位搜索</h1>
+
+    {% load staticfiles %}
+    <div >
+            <img src="{% static 'xiongba1.png' %}" width="622" height="700" style="color:blue;margin-left:20px;">
+
+       <form action="../seatDetail/" style="position:absolute;font-size:80px;margin-top:-670px;margin-left:85px">
+           <h1 style="font-size:20px;transform:rotate(200deg);
+-ms-transform:rotate(200deg); 	/* IE 9 */
+-moz-transform:rotate(190deg); 	/* Firefox */
+-webkit-transform:rotate(-26deg); /* Safari 和 Chrome */
+-o-transform:rotate(200deg); 	/* Opera */">这里输入名字</h1>
+        <input name="name" style="font-size:30px;width:200px;height:100px;transform:rotate(200deg);
+-ms-transform:rotate(200deg); 	/* IE 9 */
+-moz-transform:rotate(190deg); 	/* Firefox */
+-webkit-transform:rotate(-26deg); /* Safari 和 Chrome */
+-o-transform:rotate(200deg); 	/* Opera */">
+            <br>
+            <!--<input type="submit" style="font-size:80px" size="10">-->
+        </form>
+    </div>
+
 </body>
 </html>
