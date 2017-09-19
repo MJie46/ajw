@@ -20,17 +20,14 @@ write("</table>")
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>'detail'</title>
+    <title>座位表</title>
 </head>
 <body>
-    <h1>搜索结果</h1>
-    <h1>您在第{{tableid}}围，可参考下面的图入座</h1>
+    <h1></h1>
+    <h1 style="font-size:50px;font-family:Microsoft YaHei">您在第{{tableid}}围，可参考下图入座</h1>
 
     <!--<canvas id="canvas" width=1200 height=document.body.clientWidth*1800/1204.0 style="border:1px solid #c3c3c3;"/>-->
-    <canvas id="canvas" height=1800 width="1500"/>
-
-    <br>网页可见区域宽:document.body.clientWidth<br />
-
+    <canvas id="canvas" height=1700 width="1500"/>
     <script>
 
         var canvas=document.getElementById("canvas");
@@ -42,7 +39,7 @@ write("</table>")
         var tw1 = 600*rate
         var th1 = 200*rate
         var tw2 = 200*rate
-        var th2 = 800*rate
+        var th2 = 1800
         var tc = 50*rate
         var intx = ((width-tw2)/2-0-tc*2*2)/(3)
         var intx1 = ((width-tw2)/2-0-tc*1*2)/(2)
@@ -59,7 +56,7 @@ write("</table>")
         var linewidth = 2
         var color_black = '#000000'
         var color_red = '#FFC90A'
-        var color_gray = '#969696'
+        var color_gray = '#f8d5d9'
         var tables = []
         var guestlist = {{ guestall|safe }};
 

@@ -2,49 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>seatSearch</title>
+    <title>AJWedding</title>
     <style>
 
+    h1.title{
+        position:absolute;
+        margin-top:30px;
+        margin-left:30px;
+        font-size:60px;
+    }
+    img.bgimg{
+        width:100%;
+        height:100%;
+        color:blue;
+        margin-left:0px;
+    }
+    form.inputform{
+        position:absolute;
+        margin-top:-135%;
+        margin-left:10%;
+        width:29%;
+        height:21%;
+        transform:rotate(-27deg);
+        -ms-transform:rotate(-27deg); 	/* IE 9 */
+        -moz-transform:rotate(-27deg); 	/* Firefox */
+        -webkit-transform:rotate(-27deg); /* Safari 和 Chrome */
+        -o-transform:rotate(-27deg); 	/* Opera */
+    }
+
+    input.name {
+        font-size:90px;
+        width:100%;
+        height:70%;
+        text-align:center;
+        background-color:transparent;
+        border-width:0px;
+
+    }
     input::-webkit-input-placeholder {
         /* placeholder颜色  */
-        color: #000000;
+        color: #353543;
         /* placeholder字体大小  */
-        font-size: 38%;
+        font-size: 50%;
         /* placeholder位置  */
         text-align: right;
     }
-    input.name {
-        font-size:90%;
-        width:25%;height:70%;
-        text-align:center;
-        background-color:transparent;
-        border-width:1px;
-        transform:rotate(200deg);
-        -ms-transform:rotate(200deg); 	/* IE 9 */
-        -moz-transform:rotate(190deg); 	/* Firefox */
-        -webkit-transform:rotate(-27deg); /* Safari 和 Chrome */
-        -o-transform:rotate(200deg); 	/* Opera */
+    input.btn1 {
+        margin-left:30%;
+        width:40%;
+        height:30%
+        <!--position:absolute;-->
     }
+    div.d2{
+        margin-top:-43%;
+    }
+
     </style>
 </head>
 <body>
-    <h1 style="font-size:60px">座位搜索</h1>
 
-    <!--{% load staticfiles %}-->
+    <h1 class="title">座位搜索</h1>
     <div >
-                <img src="/static/xiongba4.png" style="width:100%;height:100%;color:blue;margin-left:0px;">
-
-               <form action="../seatDetail/" style="position:absolute;font-size:80px;margin-top:-134%;margin-left:11%">
-           <!--<h1 style="font-size:50%;margin-top:0;transform:rotate(200deg);-->
-              <!-- -ms-transform:rotate(200deg); 	/* IE 9 */-->
-              <!-- -moz-transform:rotate(190deg); 	/* Firefox */-->
-              <!-- -webkit-transform:rotate(-26deg); /* Safari 和 Chrome */-->
-              <!-- -o-transform:rotate(200deg); 	/* Opera */">点击输入名字</h1>-->
-        <input name="name" class="name" placeholder="点击输入名字" >
-            <br>
-            <!--<input type="submit" style="font-size:80px" size="10">-->
+        <img class="bgimg" src="/static/xiongba4.png">
+        <form class="inputform" action="../seatDetail/">
+            <input class="name" name="name" id="nameinput"  placeholder="点击输入名字">
         </form>
     </div>
+    <div class="d2">
+        <input class="btn1" type="image" id="btn1" name="name" src="/static/btn1.png">
+    </div>
+
 
 </body>
 </html>
+
+   <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script>
+   $(document).ready(function(){
+      $("#btn1").click(function(){
+        <!--var a = $("#nameinput").val();-->
+        var p = document.getElementById("nameinput").value;
+        $.get("../seatDetail/",{'name':p}, function(ret){
+            <!--$(ret)-->
+        })
+      });
+    });
+
+    <!--var p = document.getElementById("nameinput").value;-->
+    <!--function getValue() {-->
+        <!--document.getElementById("show").innerHTML = p-->
+    <!--}-->
+    </script>
