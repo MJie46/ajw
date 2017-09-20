@@ -64,32 +64,46 @@
     <h1 class="title">座位搜索</h1>
     <div >
         <img class="bgimg" src="/static/xiongba4.png">
-        <form class="inputform" action="../seatDetail/">
-            <input class="name" name="name" id="nameinput"  placeholder="点击输入名字">
+        <form class="inputform" name="form1" action="../seatDetail/">
+            <input class="name" name="name" id="nameinput"  placeholder="点击输入名字" >
         </form>
     </div>
     <div class="d2">
-        <input class="btn1" type="image" id="btn1" name="name" src="/static/btn1.png">
+        <input class="btn1" type="image" id="btn1" name="name" src="/static/btn1.png" onclick="searchSeat()">
     </div>
 
 
 </body>
 </html>
 
-   <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script>
-   $(document).ready(function(){
-      $("#btn1").click(function(){
-        <!--var a = $("#nameinput").val();-->
-        var p = document.getElementById("nameinput").value;
-        $.get("../seatDetail/",{'name':p}, function(ret){
-            <!--$(ret)-->
-        })
-      });
-    });
+   <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>-->
+   <!--<script>-->
+   <!--$(document).ready(function(){-->
+      <!--$("#btn1").click(function(){-->
+        <!--&lt;!&ndash;var a = $("#nameinput").val();&ndash;&gt;-->
+        <!--var p = document.getElementById("nameinput").value;-->
+        <!--$.get("/seatDetail/",{'name':p}, function(ret){-->
+            <!--&lt;!&ndash;$(ret)&ndash;&gt;-->
+            <!--&lt;!&ndash;window.location.href('http://www.baidu.com')&ndash;&gt;-->
+            <!--alert(ret)-->
+        <!--})-->
+      <!--});-->
+    <!--});-->
 
-    <!--var p = document.getElementById("nameinput").value;-->
-    <!--function getValue() {-->
-        <!--document.getElementById("show").innerHTML = p-->
-    <!--}-->
+    <!--&lt;!&ndash;var p = document.getElementById("nameinput").value;&ndash;&gt;-->
+    <!--&lt;!&ndash;function getValue() {&ndash;&gt;-->
+        <!--&lt;!&ndash;document.getElementById("show").innerHTML = p&ndash;&gt;-->
+    <!--&lt;!&ndash;}&ndash;&gt;-->
+    <!--</script>-->
+
+    <script language="javascript">
+        //通过获取JavaScript函数的方式访问printPerson.html和selectPerson.html
+        function searchSeat(){
+            //1:获取表单
+            var form1 = document.form1;
+            //2.设置表单的action属性
+            form1.action="../seatDetail/";
+            //3.提交表单
+            form1.submit();
+        }
     </script>

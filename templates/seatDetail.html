@@ -24,17 +24,24 @@ write("</table>")
 </head>
 <body>
     <h1></h1>
-    <h1 style="font-size:50px;font-family:Microsoft YaHei">您在第{{tableid}}围，可参考下图入座</h1>
+    <h1 style="width:100%;text-align:center;font-size:75px;font-family:Microsoft YaHei">您在第{{tableid}}围，可参考下图入座</h1>
 
     <!--<canvas id="canvas" width=1200 height=document.body.clientWidth*1800/1204.0 style="border:1px solid #c3c3c3;"/>-->
-    <canvas id="canvas" height=1700 width="1500"/>
+    <canvas id="canvas" height=1700 width="1300"/>
+
     <script>
+
+        function timedMsg(msg)
+    　　 {
+    　　     var t=setTimeout("alert('您在第{{tableid}}围，可参考下图入座')",500)
+    　　 }
+        timedMsg()
 
         var canvas=document.getElementById("canvas");
         var ctx=canvas.getContext("2d");
         <!--var width = document.body.clientWidth-->
         var rate = 1400/1200.0
-        var width = 1200
+        var width = 1300
         var height = 1400
         var tw1 = 600*rate
         var th1 = 200*rate
