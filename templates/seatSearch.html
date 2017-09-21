@@ -56,10 +56,18 @@
     div.d2{
         margin-top:-43%;
     }
+    img.splash_img{
+         position:absolute;
+         margin-top:-150%;
+         width:100%;
+         height:150%;
+         filter:alpha(opacity:30);
+         <!--float:left;-->
+     }
 
     </style>
 </head>
-<body>
+<body id='body'>
 
     <h1 class="title">座位搜索</h1>
     <div >
@@ -71,6 +79,8 @@
     <div class="d2">
         <input class="btn1" type="image" id="btn1" name="name" src="/static/btn1.png" onclick="searchSeat()">
     </div>
+
+    <img id="splash_img" class="splash_img" src="/static/splash_screen.jpeg">
 
 
 </body>
@@ -97,6 +107,49 @@
     <!--</script>-->
 
     <script language="javascript">
+
+    var fade = function(element, transparency, speed, callback)
+    {
+    //透明度渐变：transparency:透明度 0(全透)-100(不透)；speed:速度1-100，默认为1
+	if(typeof(element)=='string')element=document.getElementById(element);
+	if(!element.effect){
+		element.effect = {};
+		element.effect.fade=0;
+	}
+	clearInterval(element.effect.fade);
+	var speed=speed||1;
+	var start=(function(elem){
+		var alpha;
+		if(navigator.userAgent.toLowerCase().indexOf('msie') != -1){
+				alpha=elem.currentStyle.filter.indexOf("opacity=") >= 0?(parseFloat( elem.currentStyle.filter.match(/opacity=([^)]*)/)[1] )) + '':
+				'100';
+		}else{
+				alpha=100*elem.ownerDocument.defaultView.getComputedStyle(elem,null)['opacity'];
+		}
+		return alpha;
+	})(element);
+	if(window.console&&window.console.log)
+	console.log('start: '+start+" end: "+transparency);
+	element.effect.fade = setInterval(function(){
+		start = start < transparency ? Math.min(start + speed, transparency) : Math.max(start - speed, transparency);
+		element.style.opacity =  start / 100;
+		element.style.filter = 'alpha(opacity=' + start + ')';
+		if(Math.round(start) == transparency){
+			element.style.opacity =  transparency / 100;
+			element.style.filter = 'alpha(opacity=' + transparency + ')';
+			clearInterval(element.effect.fade);
+			if(callback)callback.call(element);
+		}
+	}, 20);
+};
+        function removeTag(parentName,chiledName){
+
+            var parent=document.getElementById(parentName);
+            var child=document.getElementById(chiledName);
+            parent.removeChild(child);
+
+        }
+
         //通过获取JavaScript函数的方式访问printPerson.html和selectPerson.html
         function searchSeat(){
             //1:获取表单
@@ -106,4 +159,9 @@
             //3.提交表单
             form1.submit();
         }
+
+        var t=setTimeout("fade('splash_img', 0, 3)",2000)
+        var t=setTimeout("removeTag('body','splash_img')", 4000)
+
+
     </script>
